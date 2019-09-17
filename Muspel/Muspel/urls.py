@@ -15,7 +15,12 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from django.urls import path, include
+from Course.views import CourceDetailView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('', include('payments.urls')),
+    path('coursedital/<int:pk>/', CourceDetailView.as_view(), name='coursedital')
+
 ]

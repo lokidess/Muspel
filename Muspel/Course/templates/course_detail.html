@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+
+{%load staticfiles%}
+
+{% block main_content %}
+
+
+
+
+
+<div class="container">
+    <div class="jumbotron">
+        <center>Название курса: {{ course.name }}</center><br><br>
+    Кратко о курсе: {{course.short_description}}<br><br>
+
+
+       <p><button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+            Полное описание
+         </button>
+        <div class="collapse" id="collapseExample">
+            <div class="card card-body">
+                {{ course.description }}
+            </div>
+        </p>
+        </div>
+        <div style="float: right;">Prise: {{ course.price }}$
+            <form action="{% url 'charge' %}" method="post">
+                 {% csrf_token %}
+                <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+                  data-key="{{ key }}"
+                  data-description="A Django Charge"
+                  data-amount=""
+                  data-locale="auto"></script>
+            </form>
+        </div>
+
+    </div>
+
+
+
+{% endblock main_content %}
