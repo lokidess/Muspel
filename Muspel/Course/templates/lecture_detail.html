@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{%load staticfiles%}
+{% load embed_video_tags %}
+
+
+{% block main_content %}
+
+<div class="container">
+    <center> <h3>{{ lecture.name_lecture}}</h3> </center>
+    <div class="jumbotron">
+        <center><div>
+            {% if lecture.video %}
+                <iframe width="560" height="315" src="{{ lecture.video }}" frameborder="0" allowfullscreen></iframe>
+            {% endif %}
+        </div></center>
+      <h5>Текст лекции: </h5>  {{ lecture.text_lecture }}
+    </div>
+</div>
+
+<div class="container">
+    <center><h3>Домашнее залание</h3></center>
+    <div class="jumbotron">
+      {{ lecture.home_work }}
+        <p align="right">{{ lecture.lecture_status }}</p>
+    </div>
+</div>
+
+{% endblock main_content %}

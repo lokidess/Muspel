@@ -2,27 +2,23 @@
 
 {%load staticfiles%}
 
+
 {% block main_content %}
 
-
-
-
-
 <div class="container">
+        <h3><center>Название курса: {{ course.name }}</center></h3>
     <div class="jumbotron">
-        <center>Название курса: {{ course.name }}</center><br><br>
     Кратко о курсе: {{course.short_description}}<br><br>
-
-
-       <p><button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
-            Полное описание
-         </button>
-        <div class="collapse" id="collapseExample">
-            <div class="card card-body">
-                {{ course.description }}
-            </div>
+       <p>
+           <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+                Полное описание
+            </button>
+            <div class="collapse" id="collapseExample">
+                <div class="card card-body">
+                    {{ course.description }}
+                </div>
         </p>
-        </div>
+    </div>
         <div style="float: right;">Prise: {{ course.price }}$
             <form action="{% url 'charge' %}" method="post">
                  {% csrf_token %}
@@ -33,9 +29,16 @@
                   data-locale="auto"></script>
             </form>
         </div>
+    </div>
+<div class="container">
+    <div class="jumbotron">
+           {% for lecture in lecture %}
+               <li>
+                   <a href="{% url 'lecture_detail' lecture.id %}">{{ lecture }}</a>
+               </li>
+            {% endfor %}
 
     </div>
-
-
+</div>
 
 {% endblock main_content %}

@@ -1,4 +1,5 @@
 from django.db import models
+from embed_video.fields import EmbedVideoField
 
 
 class Course(models.Model):
@@ -9,7 +10,6 @@ class Course(models.Model):
     category = models.ForeignKey('Course.Category', on_delete=models.CASCADE, null=True, blank=True)
     comment = models.ForeignKey('Course.Comment', on_delete=models.CASCADE, null=True, blank=True)
     status_course = models.BooleanField(default=False)
-
 
     def __str__(self):
         return self.name
@@ -31,7 +31,7 @@ class Lecture(models.Model):
     text_lecture = models.TextField()
     home_work = models.TextField()
     lecture_status = models.BooleanField(default=False)
-    video = models.FileField(upload_to='files/', null=True, blank=True)
+    video = EmbedVideoField(blank=True, verbose_name='Видео')
     course = models.ForeignKey(Course, on_delete=models.CASCADE)
 
     def __str__(self):
